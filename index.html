@@ -246,7 +246,7 @@
       <img src="assets/images/foto.png" width="350" height="350"> </center>
       <div class="contact-form-container">
         <div class="contact-form">
-          <form action="https://formspree.io/f/mdorowaa" method="POST">
+          <form id="formulario" action="https://formspree.io/f/mdorowaa" method="POST">
             <div class="form-control">
               <label for="name">Nombre</label>
               <input
@@ -282,14 +282,47 @@
               ></textarea>
             </div>
             <input
-              type="submit"
-              value="Enviar"
-              id="submit-btn"
-              class="submit-btn"
-            />
+            type="submit"
+            value="Enviar"
+            id="submit-btn"
+            class="submit-btn"
+            onclick="mostrarMensaje()"
+          />
           </form>
+          <script>
+            function mostrarMensaje() {
+              alert('Mensaje enviado');
+            }
+          </script>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var form = document.getElementById('formulario'); // Reemplaza 'tu-formulario' con el ID de tu formulario
+              form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Evita que se envíe el formulario de forma predeterminada
+                
+                // Aquí puedes agregar código adicional, como validación del formulario, antes de enviarlo
+                
+                // Envía el formulario utilizando AJAX
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', form.action);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function() {
+                  if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    // Redirige al usuario a index.html después de enviar el formulario
+                    window.location.href = 'index.html';
+                  }
+                };
+                xhr.send(new FormData(form));
+              });
+            });
+          </script>
+          
+          
         </div>
       </div>
+      
+      
+      
     </section>
 
     <!-- Social accounts - Fixed to the right -->
